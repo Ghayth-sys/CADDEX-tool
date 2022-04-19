@@ -1,0 +1,502 @@
+# Importation de API FreeCAD (Acess biblioteche) 
+import FreeCAD, Part
+import FreeCAD as App
+import FreeCADGui as Gui
+from FreeCAD import Base , Console
+import PySide
+from PySide import QtCore, QtGui
+from FreeCADGui import PySideUic as uic
+
+path = r"C:\Program Files\FreeCAD 0.18\5.png"  
+path1=r"C:\Program Files\FreeCAD 0.18\1.png"
+path2=r"C:\Program Files\FreeCAD 0.18\3.png" 
+path3=r"C:\Program Files\FreeCAD 0.18\4.gif"
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+class Ui_MainWindow(object):
+     def __init__(self, MainWindow):
+        self.dataComponent           = ""
+        self.results                 = ""
+        self.window = MainWindow
+        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.resize(800, 800)
+        self.centralWidget = QtGui.QWidget(MainWindow)
+        self.centralWidget.setObjectName(_fromUtf8("centralWidget"))
+
+
+        self.pushButton_2 = QtGui.QPushButton(self.centralWidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(30, 200, 110, 40))
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_2.clicked.connect(self.on_pushButton_2clicked) #connection pushButton
+        self.pushButton_2_1 = QtGui.QPushButton(self.centralWidget)
+        self.pushButton_2_1.setGeometry(QtCore.QRect(30, 300, 110, 40))
+        self.pushButton_2_1.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_2_1.clicked.connect(self.on_pushButton_2_1clicked) #connection pushButton
+        self.pushButton_2_2 = QtGui.QPushButton(self.centralWidget)
+        self.pushButton_2_2.setGeometry(QtCore.QRect(30,250, 110, 40))
+        self.pushButton_2_2.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_2_2.clicked.connect(self.on_pushButton_2_2clicked) #connection pushButton
+        self.pushButton_3 = QtGui.QPushButton(self.centralWidget)
+        self.pushButton_3.setGeometry(QtCore.QRect(30,350, 110, 40))
+        self.pushButton_3.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_3.clicked.connect(self.on_pushButton_3clicked) #connection pushButton       
+        self.pushButton_4= QtGui.QPushButton(self.centralWidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(30,400, 110, 40))
+        self.pushButton_4.setObjectName(_fromUtf8("pushButton"))
+
+        self.pushButton_4.clicked.connect(self.on_pushButton_4clicked) #connection pushButton    
+        self.pushButton_8= QtGui.QPushButton(self.centralWidget)
+        self.pushButton_8.setGeometry(QtCore.QRect(30, 450, 110, 40))
+        self.pushButton_8.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_8.clicked.connect(self.on_pushButton_5clicked) 
+        self.textEdit_5 = QtGui.QTextEdit(self.centralWidget)
+        self.textEdit_5.setGeometry(QtCore.QRect(150, 50, 500,600))
+        self.textEdit_5.setObjectName(_fromUtf8("textEdit"))
+        self.pushButton_6= QtGui.QPushButton(self.centralWidget)
+        self.pushButton_6.setGeometry(QtCore.QRect(550, 660, 100, 35))
+        self.pushButton_6.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_6.clicked.connect(self.on_pushButton_6clicked) 
+
+        self.pushButton_7= QtGui.QPushButton(self.centralWidget)
+        self.pushButton_7.setGeometry(QtCore.QRect(400, 660, 100, 35))
+        self.pushButton_7.setObjectName(_fromUtf8("pushButton"))
+        self.pushButton_7.clicked.connect(self.on_pushButton_7clicked) 
+
+        self.graphicsView = QtGui.QGraphicsView(self.centralWidget)                                # graphic view declaration
+        self.graphicsView.setGeometry(QtCore.QRect(665, 50, 120, 120))                       # coordinates position
+        pic = QtGui.QPixmap(path)
+        self.scene = QtGui.QGraphicsScene()                                                 #
+        self.scene.addPixmap(QtGui.QPixmap(pic))
+        self.graphicsView.setScene(self.scene)
+
+ 
+        self.graphicsView = QtGui.QGraphicsView(self.centralWidget)                                # graphic view declaration
+        self.graphicsView.setGeometry(QtCore.QRect(20, 50, 120, 120))                       # coordinates position
+        pic = QtGui.QPixmap(path3)
+        self.scene = QtGui.QGraphicsScene()                                                 #
+        self.scene.addPixmap(QtGui.QPixmap(pic))
+        self.graphicsView.setScene(self.scene) 
+
+        self.graphicsView = QtGui.QGraphicsView(self.centralWidget)                                # graphic view declaration
+        self.graphicsView.setGeometry(QtCore.QRect(665, 550, 120, 120))                       # coordinates position
+        pic = QtGui.QPixmap(path2)
+        self.scene = QtGui.QGraphicsScene()                                                 #
+        self.scene.addPixmap(QtGui.QPixmap(pic))
+        self.graphicsView.setScene(self.scene)
+
+        self.graphicsView = QtGui.QGraphicsView(self.centralWidget)                                # graphic view declaration
+        self.graphicsView.setGeometry(QtCore.QRect(20, 550, 120, 120))                       # coordinates position
+        pic = QtGui.QPixmap(path1)
+        self.scene = QtGui.QGraphicsScene()                                                 #
+        self.scene.addPixmap(QtGui.QPixmap(pic))
+        self.graphicsView.setScene(self.scene)
+
+
+        MainWindow.setCentralWidget(self.centralWidget)
+        self.menuBar = QtGui.QMenuBar(MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 400, 26))
+        self.menuBar.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.setMenuBar(self.menuBar)
+        self.mainToolBar = QtGui.QToolBar(MainWindow)
+        self.mainToolBar.setObjectName(_fromUtf8("mainToolBar"))
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.mainToolBar)
+        self.statusBar = QtGui.QStatusBar(MainWindow)
+        self.statusBar.setObjectName(_fromUtf8("statusBar"))
+        MainWindow.setStatusBar(self.statusBar)
+        self.retranslateUi(MainWindow)
+
+      
+
+     def retranslateUi(self, MainWindow):
+        MainWindow.setWindowFlags(PySide.QtCore.Qt.WindowStaysOnTopHint)
+        MainWindow.setWindowTitle(_translate("MainWindow", "CADDEX ", None))
+        self.textEdit_5.setText(_translate("MainWindow", " ", None))
+   #     self.pushButton_1.setText(_translate("MainWindow", "", None)) 
+        self.pushButton_2.setText(_translate("MainWindow", "Part Data", None)) 
+        self.pushButton_2_1.setText(_translate("MainWindow", "Constraint Data ", None)) 
+        self.pushButton_2_2.setText(_translate("MainWindow", "Geometric Data", None)) 
+        self.pushButton_3.setText(_translate("MainWindow", "Adjacency Matrices ", None))
+        self.pushButton_4.setText(_translate("MainWindow", "Contact Matrices ", None))
+        self.pushButton_8.setText(_translate("MainWindow", "Relation Matrix", None))
+        self.graphicsView.setObjectName(_fromUtf8("graphicsView"))
+        self.pushButton_6.setText(_translate("MainWindow", "Quit ", None))
+        self.pushButton_7.setText(_translate("MainWindow", "Export ", None)) 
+        
+        self.graphicsView.setFrameShape(QtGui.QFrame.StyledPanel) 
+     def on_pushButton_1clicked(self):#quitter
+            App.Console.PrintMessage("\r\n")
+            self.window.hide()      
+     def on_pushButton_2clicked(self):    #Données piéce
+            msg = ""
+            for i in range(n) :
+                  msg =msg+ data[i]+"\n"+"\n"
+            msg_f = data[n]+str(msg)
+            self.dataComponent =str(msg_f)
+            self.textEdit_5.setText(self.dataComponent)
+     def on_pushButton_2_1clicked(self):    #Données Contraintes
+            b_c=str(int((n_c)/2))
+            msg_C=""
+            for i in range(len(L_msg)):
+                  msg_C=msg_C+L_msg[i]
+            self.dataComponent ="Total Constraint number :      "+str(b_c)+"\n"+"----------------------------------------------------------------"+"\n"+str(msg_C)
+            self.textEdit_5.setText(self.dataComponent)
+     def on_pushButton_2_2clicked(self):    #Données Géométrique
+            msg_cc=""
+            for i in range(len(L_msg_g)) :
+                  msg_cc=msg_cc+"Geometrical and Topological Data" +":  part"+str(i+1)+"\n"+"\n"+L_msg_g[i]+"-------------------------------------------------------------------------"+"\n"
+            self.dataComponent =msg_cc
+            self.textEdit_5.setText(self.dataComponent)
+
+     def on_pushButton_3clicked(self):       #Matrice d'adjacence
+            msg_1_1=""
+            L_i = []
+            msg_index_L="\n  "
+            for i in range(n) :
+                   L_i.append(i+1)
+                   #msg_index_L=msg_index_L+". "+str(L_i[i])
+
+                   msg_1_1 =  msg_1_1+"\n "+""+str(L_i[i])+str(X[i])
+            msg_index_L=msg_index_L+str(L_i)
+            msg_1="The adjacency matrix: X direction : "+"\n" +msg_index_L+msg_1_1         
+            msg_1_2=""
+            for i in range(n) :        
+                   msg_1_2 =  msg_1_2+"\n "+""+str(i+1)+str(Y[i])
+            msg_2 ="The adjacency matrix: Y direction : "+"\n"+msg_index_L+msg_1_2 
+            msg_1_3=""
+            for i in range(n) :
+                   msg_1_3 =  msg_1_3+"\n "+""+str(i+1)+str(Z[i])  
+            msg_3 ="The adjacency matrix: Z direction : "+"\n"+msg_index_L+msg_1_3
+            msg_ad = msg_1+"\n"+"\n"+msg_2+"\n"+"\n"+msg_3
+            self.results =str(msg_ad)
+            self.textEdit_5.setText(self.results)                
+     def on_pushButton_4clicked(self): #Matrice de contacte
+
+            msg_1_1_1=""
+            msg_index_L="\n  "
+            for i in range(n) :
+                   msg_index_L=msg_index_L+". "+str(i+1)
+                   msg_1_1_1 =  msg_1_1_1+"\n "+str(i+1)+str(X1[i])
+            msg_ ="The contact matrix: X direction "+"\n"+msg_index_L+msg_1_1_1
+
+            msg_1_1_2=""
+            for i in range(n) :
+                   msg_1_1_2 =  msg_1_1_2+"\n "+str(i+1)+str(Y1[i])   
+
+            msg ="The contact matrix: Y direction "+"\n"+msg_index_L+msg_1_1_2
+
+            msg_1_1_3=""
+            for i in range(n) :
+                   msg_1_1_3 =  msg_1_1_3+"\n "+str(i+1)+str(Z1[i])
+  
+            msg3 ="The contact matrix: Z direction "+"\n"+msg_index_L+msg_1_1_3       
+
+
+            msg_ad_ = msg_+"\n"+"\n"+msg+"\n"+"\n"+msg3
+            self.results         =str(msg_ad_)
+            self.textEdit_5.setText(self.results)
+     def on_pushButton_5clicked(self): #matrice des relation
+            msg_1_1_1_1=""
+            msg_index_L_1="\n  "
+ 
+            for i in range(n) :
+                  msg_index_L_1=msg_index_L_1+". "+str(i+1)
+
+                  msg_1_1_1_1 =  msg_1_1_1_1+"\n "+str(i+1)+str(R[i])
+
+            msg_ =" Relation matrix : "+"\n"+msg_index_L_1+msg_1_1_1_1
+
+            self.results         =msg_
+            self.textEdit_5.setText(self.results)
+  
+     def on_pushButton_7clicked(self): #Assembly Matrices
+            targets = Gui.Selection.getSelection() #Target the selected object(s)
+            if len(targets) < 1: #If no selected object ...
+                targets = App.ActiveDocument.Objects #...take all document objects
+                self.window.hide()
+                filename, _ = QtGui.QFileDialog.getSaveFileName(Gui.getMainWindow(), 'Save to XML', filter = 'XML files (*.xml)') #Get filename to save to
+            if filename != '': #If a file has been chosen...
+               file = open(filename, 'w') #...open it for writing
+               file.writelines(['<?xml version="1.0" encoding="UTF-8"?>\n','<document>\n']) #Print header
+               for obj in targets: #For each object
+                     if hasattr(obj, 'Shape')and not obj.Shape.isNull() and obj.Shape.isValid(): #If it has a non-null valid shape
+                        file.writelines(['    <object>\n', #Print a new object
+                        '        <label>{:s}</label>\n'.format(obj.Label), #Print label
+                        '        <volume>{:f}</volume>\n'.format(obj.Shape.Volume), #Print volume
+                        '        <Area>{:f}</Area>\n'.format(obj.Shape.Area),#Print Area
+                        '        <weight>{:f}</weight>\n'.format(obj.Shape.Volume),
+                        '        <vertexNum>{:d}</vertexNum>\n'.format(len(obj.Shape.Vertexes)), #Print vertex count
+                        '        <FaceNum>{:d}</FaceNum>\n'.format(len(obj.Shape.Faces)), #Print Faces count
+                
+                                           '    </object>\n']) #Close object
+               file.write('</document>\n') #Close document
+               file.close() #Close file                 
+     def on_pushButton_6clicked(self): #Quit
+
+            App.Console.PrintMessage("by\r\n")
+            self.window.hide()
+            return
+MainWindow = QtGui.QMainWindow()
+ui = Ui_MainWindow(MainWindow)
+MainWindow.show()
+#creation des listes vides
+LP   =[] 
+LPCM= []
+LPS =[]
+LPM =[]    
+LPV =[]
+LNC = [] 		#Liste nom contrainte
+LCC1 = [] 	#Liste composants contrainte 1
+LCC2 = [] 	#Liste composants contrainte 2
+LTC = [] 		#Liste type contrainte
+LDC= []  		#Liste direction contrainte
+LP2 =[]
+LP3 =[]
+LM=[]
+MI=[]
+Si=[]
+
+#Boucle pour lire tous les objets dans le document active 
+for object in FreeCAD.ActiveDocument.Objects:
+	#Si l'objet est une piece donc remplissage LP et LP3 par les noms des pieces
+    if 'objectType' in   object.PropertiesList:
+         LPS.append(object.Shape.Area)
+         LPCM.append(object.Shape.CenterOfMass)
+         LPM.append(object.Shape.Mass)
+         LPV.append(object.Shape.Volume)
+         MI.append(object.Shape.MatrixOfInertia)
+         LP.append(object.Label)    #Remplissage des noms des pieces dans le document active
+         LP3.append(object.Label)  #Remplissage des noms des pieces dans le document active   
+	#Si l'objet est contrainte donc remplissage de LP2 par le nom object1 et nom de object2 
+
+    if 'Type' in object.PropertiesList:
+         LNC.append(object.Label)
+         LCC1.append(object.Object1)
+         LCC2.append(object.Object2)
+         LTC.append(object.Type)
+         LP2.append(object.Object1)      #Remplissage Object1 dans le document active
+         LP2.append(object.Object2)      #Remplissage Object2 dans le document active
+n=len(LP) # nombres des piece dans le document active
+#Boucle pour ajouter b_ et _ pour chaque element de la liste LP 
+for i in range (n):
+   LP[i] = "b_"+str(LP[i]+"_")
+#Création d'une matrice X de taille n x n 
+X = [0] * n  #Initialisation de la matrice a zeros  
+for i in range (n):
+    X[i] = [0] * n
+#Création d'une matrice Y de taille n x n 
+Y = [0] * n
+for i in range (n):
+    Y[i] = [0] * n #Initialisation de la matrice a zeros  
+#Création d'une matrice Z de taille n x n 
+Z = [0] * n
+for i in range (n):
+    Z[i] = [0] * n #Initialisation de la matrice a zeros  
+#Création d'une matrice R de taille n x n 
+R = [0] * n  #Initialisation de la matrice a zeros  
+for i in range (n):
+    R[i] = [0] * n
+#Création d'une matrice X de taille n x n 
+X1 = [0] * n  #Initialisation de la matrice a zeros  
+for i in range (n):
+    X1[i] = [0] * n
+#Création d'une matrice Y de taille n x n 
+Y1 = [0] * n
+for i in range (n):
+    Y1[i] = [0] * n #Initialisation de la matrice a zeros  
+#Création d'une matrice Z de taille n x n 
+Z1 = [0] * n
+for i in range (n):
+    Z1[i] = [0] * n #Initialisation de la matrice a zeros  
+u = 0
+v = 0
+LN=[] #Liste vide pour les vecteus normales 
+#Boucle pour lire tous les objets dans le document active 
+normal = []
+for object in FreeCAD.ActiveDocument.Objects:
+#Condition Si l'objet est une contrainte   
+   if 'Type' in object.PropertiesList : 
+#Déclaration d'un variable object1 qui recoit la chaine de caratère de object.Object1 
+    object1=object.Object1
+#Déclaration d'un variable object2 qui recoit la chaine de caratère devant object.Object2 
+    object2=object.Object2
+#Déclaration d'un variable Face1 qui recoit la chaine de caratère devant object.SubElement1
+    Face1  = object.SubElement1
+#Déclaration d'un variable Face2 qui recoit la chaine de caratère devant object.SubElement2
+    Face2   = object.SubElement2
+    i 	     = LP.index(object1)     		  #num piéce 1   
+    j	     = LP.index(object2)	    		 #num piéce 2
+    NF1 	     = Face1[4:]			#num face 1 mais type string 
+    NF2	     = Face2[4:]			#num face 2 mais type string 
+    numero_Face_1 = int(NF1)-1 
+    numero_Face_2 = int(NF2)-1
+    nomObjet_1  =LP3[i] #piece 1
+    nomObjet_2  =LP3[j] #piece 2
+    Edges = []
+#Matrice d'adjacence 
+    for OBJ1 in FreeCAD.ActiveDocument.Objects:
+          if  OBJ1.Label == LP3[i] :
+              normal_1      =  OBJ1.Shape.Faces[numero_Face_1].normalAt(0,0)    # determnination de la normale des contrainte 
+              FACE1          =  OBJ1.Shape.Faces[numero_Face_1]
+              normal.append(normal_1)
+    for OBJ2 in FreeCAD.ActiveDocument.Objects:
+          if  OBJ2.Label == LP3[j] :
+              normal_2      =  OBJ2.Shape.Faces[numero_Face_2].normalAt(0,0)
+              FACE2          =  OBJ2.Shape.Faces[numero_Face_2]
+
+    distance, points, info = FACE1.distToShape(FACE2)
+    if int(normal_1[0])==-1 or int(normal_1[0])==1 :
+                              X[i][j]=1
+                              X[j][i]=1                        
+    elif int(normal_1[1])==-1 or int(normal_1[1])==1 :
+                              Y[i][j]=1
+                              Y[j][i]=1              
+    else :  
+                              Z[i][j]=1
+                              Z[j][i]=1          
+ #Matrice de contacte 
+    if int(normal_1[0])==-1 or int(normal_1[0])==1 :
+                           if distance < 0.0001 : 
+                              X1[i][j]=1
+                              X1[j][i]=1                        
+    elif int(normal_1[1])==-1 or int(normal_1[1])==1 :
+                           if distance < 0.0001 : 
+                              Y1[i][j]=1
+                              Y1[j][i]=1              
+    else :  
+                           if distance < 0.0001 : 
+                              Z1[i][j]=1
+                              Z1[j][i]=1          
+#Matrice de relation
+for object in FreeCAD.ActiveDocument.Objects:
+   if 'Type' in object.PropertiesList : 
+    object1=object.Object1
+    object2=object.Object2
+    i 	     = LP.index(object1)   
+    j	     = LP.index(object2)	    		 
+    R[i][j] =0.5+R[i][j] 
+    R[j][i] =0.5+R[j][i] 
+for i in range (n) :
+     for j in range (n) :
+           R[i][j]  = int(R[i][j])
+data=[]
+masse_t=0
+volume_t=0
+surface_t=0
+
+for i in range (n):
+      data.append( "Component"+str(i+1)+" :  " +str(LP3[i]) +"\n"+"\n"+"Material: Standard Steel"+ "\n" + "\n"+ "Masse = "+str(round(LPM[i], 2))+"  g" +"\n"+"\n"+"Surface ="+str(round(LPS[i], 2))+"  mm²"+ "\n"+"\n"+"Volume = "+str(round(LPV[i], 2))+"  mm3"+"\n"+"\n"+"Center of masse coordinates ="+str(LPCM[i])+"\n"+"\n"+"Part inertia matrix"+str(i+1)+"= "+str(MI[i])+ "\n"+ "\n"+"------------------------------------------------------------------------------------------------------------")
+      masse_t =  LPM[i]+masse_t
+      volume_t = LPV[i]+volume_t
+      surface_t = LPS[i]+surface_t
+
+data.append("Total Components number  :  " +str(n) +"\n"+"\n" + "Assembly Masse = "+str(round(masse_t, 2))+"  g" + "\n"+"\n"+"Assembly Surface ="+str(round(surface_t, 2))+"  mm²"+"\n"+"\n"+"Assembly Volume = "+str(round(volume_t, 2))+"  mm3"+"\n"+"------------------------------------------------------------------------------------------------------------"+"\n"+"\n")
+EXCLUDED = [	
+	'Toponame1',
+	'Toponame2',
+	'Proxy',
+	'Shape',
+	'a2p_Version',
+       'timeLastImport',
+    	'updateColors',
+	'updateColors',
+	'subassemblyImport',
+	'sourceFile',
+	'muxInfo',
+	'ParentTreeObject',
+	'Suppressed',
+	'ExpressionEngine',
+	'Placement ',
+	'Yaw-Pitch-Roll', 
+       'lockRotation',
+       'offset',      
+]
+L_msg=[]
+n_c=0
+for object in FreeCAD.ActiveDocument.Objects:
+   if 'Type' in object.PropertiesList : 
+       normal_=normal[n_c]
+       n_c=n_c+1
+       msg_c=""
+       for p in object.PropertiesList :
+             if p not in EXCLUDED:
+                msg_c =msg_c+ '{}        {}\n'.format(p, object.getPropertyByName(p))
+       L_msg.append(msg_c+"Normal : "+str(normal_)+"\n"+"----------------------------------------------------------------"+"\n")
+#premier etape dans la programation by gandouzi ghayth 
+v=(((n_c)-(n))+1)
+import Draft,Part
+L_msg_g=[]
+for object in FreeCAD.ActiveDocument.Objects:
+          if 'objectType' in   object.PropertiesList:        
+              Vertx=[]
+              Edges=[]
+              Faces=[]
+              compt_V=0
+              compt_E=0
+              compt_F=0
+              pas    =0
+              perimetre = 0.0   
+              EdgesLong = []
+              msg_edge=""
+              for j in enumerate(object.Shape.Edges):                                     # Search the "Edges" and their lengths
+                   compt_E+=1
+                   Edges.append("Edge%d" % (j[0]+1))
+                   EdgesLong.append(str(object.Shape.Edges[compt_E-1].Length))
+                   perimetre += (object.Shape.Edges[compt_E-1].Length)                     
+                   num = object.Shape.Edges[compt_E-1].Vertexes[0]
+                   Vertx.append("X1: "+str(num.Point.x))
+                   Vertx.append("Y1: "+str(num.Point.y))
+                   Vertx.append("Z1: "+str(num.Point.z))
+            # Displays the "Edge" and its length
+            # Displays the "Edge" and its center mass
+            # Displays the coordinates 1
+                   msg_edge=msg_edge+"Edge"+str(compt_E)+" Length = "+str(object.Shape.Edges[compt_E-1].Length)+"  mm"+"\n"+"center of masse ="+str(object.Shape.Edges[compt_E-1].CenterOfMass)+"\n"+"X1: "+str(num.Point[0])+" Y1: "+str(num.Point[1])+" Z1: "+str(num.Point[2])+"      Start point"+"\n"
+                   try:
+                         num = object.Shape.Edges[compt_E-1].Vertexes[1]
+                         Vertx.append("X2: "+str(num.Point.x))
+                         Vertx.append("Y2: "+str(num.Point.y))
+                         Vertx.append("Z2: "+str(num.Point.z))
+                   except:
+                         Vertx.append("-")
+                         Vertx.append("-")
+                         Vertx.append("-")
+            # Displays the coordinates 2
+                   msg_edge=msg_edge+ "X2: "+str(num.Point[0])+" Y2: "+str(num.Point[1])+" Z2: "+str(num.Point[2])+"    End point"+"\n"+"\n"
+              msg_edge=msg_edge+"\n"+"Perimeter of the form  : "+str(perimetre)+"mm"+"\n"
+              msg_face=""
+              FacesSurf = []
+              for j in enumerate(object.Shape.Faces):                                      # Search the "Faces" and their surface
+                    compt_F+=1
+                    Faces.append("Face%d" % (j[0]+1))
+                    FacesSurf.append(str(object.Shape.Faces[compt_F-1].Area))
+                    # Displays 'Face' and its surface
+                    # Displays 'Face' and its CenterOfMass
+                    msg_face=msg_face+"Face"+str(compt_F)+" =  Surface "+str(object.Shape.Faces[compt_F-1].Area)+"mm²"+"\n"+"Face"+str(compt_F)+" =  Center of masse  "+str(object.Shape.Faces[compt_F-1].CenterOfMass)+"\n"+"\n"
+            # Displays 'Face' and its Coordinates
+              FacesCoor = []
+              fco = 0
+              msg_coord=""
+              for f0 in object.Shape.Faces[compt_F-1].Vertexes:                        # Search the Vertexes of the face
+                fco += 1
+                FacesCoor.append("X"+str(fco)+": "+str(f0.Point.x))
+                FacesCoor.append("Y"+str(fco)+": "+str(f0.Point.y))
+                FacesCoor.append("Z"+str(fco)+": "+str(f0.Point.z))
+            # Displays 'Face' and its Coordinates
+            # Displays 'Face' and its Volume
+                msg_coord=msg_coord+"Face"+str(compt_F)+" =  Coordinate"+str(FacesCoor)+"\n"+"Face"+str(compt_F)+" =  Volume  "+str(object.Shape.Faces[compt_F-1].Volume)+"\n"+"\n"
+        # Displays the total surface of the form
+              msg_s="Surface of the form    : "+str(object.Shape.Area)+"\n"+"\n"
+        # Displays the total Volume of the form
+              msg_v="Volume  of the form    : "+str(object.Shape.Volume)+"\n"+"\n"
+              L_msg_g.append(msg_edge+msg_face+msg_coord+msg_s+msg_v)
+
